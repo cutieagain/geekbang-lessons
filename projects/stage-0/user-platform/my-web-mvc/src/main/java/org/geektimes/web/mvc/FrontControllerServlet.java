@@ -63,12 +63,15 @@ public class FrontControllerServlet extends HttpServlet {
                 Set<String> supportedHttpMethods = findSupportedHttpMethods(method);
                 Path pathFromMethod = method.getAnnotation(Path.class);
                 if (pathFromMethod != null) {
+                    requestPath = pathFromClass.value();
                     requestPath += pathFromMethod.value();
                 }
                 handleMethodInfoMapping.put(requestPath,
                         new HandlerMethodInfo(requestPath, method, supportedHttpMethods));
+                controllersMapping.put(requestPath, controller);
+
             }
-            controllersMapping.put(requestPath, controller);
+            System.out.println(1);
         }
     }
 
@@ -150,6 +153,9 @@ public class FrontControllerServlet extends HttpServlet {
                         return;
                     } else if (controller instanceof RestController) {
                         // TODO
+                        RestController restController = RestController.class.cast(controller);
+                        String viewPath = restController.execute(request, response);
+                        return;
                     }
 
                 }

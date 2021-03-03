@@ -16,6 +16,14 @@ public class DBConnectionManager {
 
     private Connection connection;
 
+    {
+        try {
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserPlatformDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC","root","chenyang007");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
@@ -34,15 +42,16 @@ public class DBConnectionManager {
         }
     }
 
-    public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";
+    public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE IF EXISTS users";
 
-    public static final String CREATE_USERS_TABLE_DDL_SQL = "CREATE TABLE users(" +
-            "id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
-            "name VARCHAR(16) NOT NULL, " +
-            "password VARCHAR(64) NOT NULL, " +
-            "email VARCHAR(64) NOT NULL, " +
-            "phoneNumber VARCHAR(64) NOT NULL" +
-            ")";
+    public static final String CREATE_USERS_TABLE_DDL_SQL = "CREATE TABLE `users` (\n" +
+            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `name` varchar(16) NOT NULL,\n" +
+            "  `password` varchar(64) NOT NULL,\n" +
+            "  `email` varchar(64) NOT NULL,\n" +
+            "  `phoneNumber` varchar(64) NOT NULL,\n" +
+            "  PRIMARY KEY (`id`)\n" +
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
     public static final String INSERT_USER_DML_SQL = "INSERT INTO users(name,password,email,phoneNumber) VALUES " +
             "('A','******','a@gmail.com','1') , " +
@@ -60,8 +69,9 @@ public class DBConnectionManager {
 //        Driver driver = DriverManager.getDriver("jdbc:derby:/db/user-platform;create=true");
 //        Connection connection = driver.connect("jdbc:derby:/db/user-platform;create=true", new Properties());
 
-        String databaseURL = "jdbc:derby:/db/user-platform;create=true";
-        Connection connection = DriverManager.getConnection(databaseURL);
+//        String databaseURL = "jdbc:derby:/db/user-platform;create=true";
+//        Connection connection = DriverManager.getConnection(databaseURL);
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserPlatformDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC","root","chenyang007");
 
         Statement statement = connection.createStatement();
         // 删除 users 表
