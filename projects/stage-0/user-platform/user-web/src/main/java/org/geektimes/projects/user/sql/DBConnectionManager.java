@@ -18,8 +18,11 @@ public class DBConnectionManager {
 
     {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserPlatformDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC","root","chenyang007");
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

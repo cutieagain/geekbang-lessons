@@ -30,6 +30,8 @@ public class RestUserController implements RestController {
         User user = new User();
         user.setName(username);
         user.setPassword(password);
+        user.setEmail("111");
+        user.setPhoneNumber("aaa");
         userService.register(user);
         return "success";
     }
