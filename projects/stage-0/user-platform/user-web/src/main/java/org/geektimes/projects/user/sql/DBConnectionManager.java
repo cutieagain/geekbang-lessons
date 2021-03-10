@@ -22,21 +22,22 @@ public class DBConnectionManager { // JNDI Component
     @Resource(name = "jdbc/UserPlatformDB")
     private DataSource dataSource;
 
+    @Resource(name = "bean/EntityManager")
+    private EntityManager entityManager;
+
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserPlatformDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC","root","chenyang007");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+//            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserPlatformDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC","root","chenyang007");
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     public void setConnection(Connection connection) {
-        this.connection = connection;
-    @Resource(name = "bean/EntityManager")
-    private EntityManager entityManager;
+//        this.connection = connection;
+    }
 
 //    public Connection getConnection() {
 //        ComponentContext context = ComponentContext.getInstance();

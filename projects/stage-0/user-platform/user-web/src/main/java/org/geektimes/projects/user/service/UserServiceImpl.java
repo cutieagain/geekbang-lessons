@@ -1,6 +1,8 @@
 package org.geektimes.projects.user.service;
 
 import org.geektimes.projects.user.domain.User;
+import org.geektimes.projects.user.repository.DatabaseUserRepository;
+import org.geektimes.projects.user.sql.DBConnectionManager;
 import org.geektimes.projects.user.sql.LocalTransactional;
 
 import javax.annotation.Resource;
@@ -15,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Resource(name = "bean/Validator")
     private Validator validator;
 
-    @Override
+    /*@Override
     // 默认需要事务
     @LocalTransactional
     public boolean register(User user) {
@@ -54,12 +56,11 @@ public class UserServiceImpl implements UserService {
         // transaction.commit();
 
         return false;
-import org.geektimes.projects.user.repository.DatabaseUserRepository;
-import org.geektimes.projects.user.sql.DBConnectionManager;
+    }*/
 
-public class UserServiceImpl implements UserService{
 
-    DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository(new DBConnectionManager());
+//    DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository(new DBConnectionManager());
+    DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository();
 
     @Override
     public boolean register(User user) {

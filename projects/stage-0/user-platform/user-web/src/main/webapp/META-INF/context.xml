@@ -14,13 +14,24 @@
 	Tomcat JNDI : http://tomcat.apache.org/tomcat-7.0-doc/jndi-resources-howto.html
 	-->
 	<!-- 资源或者组件类似于 Spring Bean -->
-	<Resource name="jdbc/UserPlatformDB"
+	<!--<Resource name="jdbc/UserPlatformDB"
               type="javax.sql.DataSource"  auth="Container"
               description="Derby database for User Platform"
               maxActive="100" maxIdle="30" maxWait="10000"
               username="" password="" 
               driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
-              url="jdbc:derby:/db/user-platform;create=true"/>
+              url="jdbc:derby:/db/user-platform;create=true"/>-->
+	<Resource
+			auth="Container"
+			driverClassName="com.mysql.jdbc.Driver"
+			maxIdle="30"
+			maxTotal="50"
+			maxWaitMillis="-1"
+			name="jdbc/UserPlatformDB"
+			username="root"
+			password="chenyang007"
+			type="javax.sql.DataSource"
+			url="jdbc:mysql://localhost:3306/UserPlatformDB?useSSL=true"/>
 
 	<!-- FactoryBean -->
 	<Resource name="bean/DBConnectionManager" auth="Container"
