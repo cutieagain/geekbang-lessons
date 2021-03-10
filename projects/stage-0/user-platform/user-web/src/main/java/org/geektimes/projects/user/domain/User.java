@@ -1,5 +1,10 @@
 package org.geektimes.projects.user.domain;
 
+import lombok.Data;
+import org.geektimes.projects.user.validator.Phone;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 /**
@@ -7,16 +12,22 @@ import java.util.Objects;
  *
  * @since 1.0
  */
+@Data
 public class User {
 
+    //自增了，不需要判断。id必须是大于0的整数
     private Long id;
 
     private String name;
 
+    @NotEmpty(message = "密码不能为空")
+    @Size(min=6, max=32,message = "密码6-32位")
     private String password;
 
     private String email;
 
+    //电话号码采用中文的方式【十一位校验】
+    @Phone
     private String phoneNumber;
 
     public Long getId() {

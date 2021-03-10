@@ -3,6 +3,7 @@ package org.geektimes.projects.user.service;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.repository.DatabaseUserRepository;
 import org.geektimes.projects.user.sql.DBConnectionManager;
+import org.geektimes.projects.user.validator.ValidatorUtils;
 
 public class UserServiceImpl implements UserService{
 
@@ -10,6 +11,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean register(User user) {
+        ValidatorUtils.validateEntity(user);
         return databaseUserRepository.save(user);
     }
 
@@ -37,8 +39,8 @@ public class UserServiceImpl implements UserService{
         //注册
         User user = new User();
         user.setName("Cutie");
-        user.setPassword("******");
-        user.setPhoneNumber("89757");
+        user.setPassword("*****");
+        user.setPhoneNumber("18700000000");
         user.setEmail("cutie@gmail.com");
         new UserServiceImpl().register(user);
         //查询
