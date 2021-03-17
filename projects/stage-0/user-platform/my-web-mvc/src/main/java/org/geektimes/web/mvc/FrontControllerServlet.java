@@ -27,7 +27,7 @@ import java.util.*;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang.StringUtils.substringAfter;
 
-public class FrontControllerServlet extends HttpServlet {
+public class FrontControllerServlet  implements FrontControllerServletMBean{
 
     /**
      * 请求路径和 Controller 的映射关系缓存
